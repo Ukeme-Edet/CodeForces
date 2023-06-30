@@ -23,3 +23,4 @@ rl.on("close", () => {
     max_sub = Math.max(curr_count, max_sub);
     console.log(max_sub);
 });
+rl.close();
