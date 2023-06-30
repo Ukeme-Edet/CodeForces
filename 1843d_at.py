@@ -10,16 +10,6 @@ def print(string):
 
 
 def main():
-    def dfs(parent, node):
-        if len(tree[node]) == 1 and tree[node][0] == parent:
-            leaf_count[node] = 1
-        else:
-            for child in tree[node]:
-                if child != parent:
-                    if leaf_count[child] == 0:
-                        dfs(node, child)
-                    leaf_count[node] += leaf_count[child]
-
     t = int(input())
     for _ in range(t):
         n = int(input())
@@ -31,7 +21,20 @@ def main():
             tree[u].append(v)
             tree[v].append(u)
         leaf_count = [0 for _ in range(n)]
-        dfs(-1, 0)
+        stack = [(0, 0, -1)]
+        while stack:
+            node, visit_count, parent = stack.pop()
+            if visit_count == 0:
+                stack.append((node, 1, parent))
+                for child in tree[node]:
+                    if child != parent:
+                        stack.append((child, 0, node))
+            else:
+                if tree[node] == [parent]:
+                    leaf_count[node] = 1
+                else:
+                    leaf_count[node] = sum(leaf_count[child]
+                                           for child in tree[node] if child != parent)
         q = int(input())
         for i in range(q):
             x, y = map(int, input().split())
