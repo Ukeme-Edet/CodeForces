@@ -17,27 +17,19 @@ def main():
         for j in range(n):
             contestant = [int(x) for x in input().split()]
             contestant.sort()
-            points, penalty = 0, 0
-            if contestant[0] < h:
-                points += 1
-                penalty += contestant[0]
-            for i in range(1, m):
-                contestant[i] = contestant[i] + contestant[i - 1]
-                if contestant[i] <= h:
+            points, penalty, time = 0, 0, 0
+            for period in contestant:
+                if time + period <= h:
+                    time += period
                     points += 1
-                    penalty += contestant[i]
+                    penalty += time
                 else:
                     break
-            participants.append([contestant, points, penalty, j == 0])
-        participants.sort(key=lambda x: x[2])
-        participants.sort(key=lambda x: x[1], reverse=True)
+            participants.append((points, penalty, j + 1))
+        participants.sort(key=lambda x: (-x[0], x[1], x[2]))
         for i in range(n):
-            if participants[i][3]:
-                offset = 0
-                if i > 0:
-                    while i > offset and participants[i][1] == participants[i - offset - 1][1] and participants[i][2] <= participants[i - offset - 1][2]:
-                        offset += 1
-                print(i - offset + 1)
+            if participants[i][2] == 1:
+                print(i + 1)
                 break
 
 
