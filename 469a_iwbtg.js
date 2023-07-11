@@ -20,6 +20,7 @@ rl.on("close", () => {
                 : "Oh, my keyboard!"
         }`
     );
+    rl.close();
 });
 let currentLine = 0;
 function input() {

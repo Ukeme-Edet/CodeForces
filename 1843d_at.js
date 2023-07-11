@@ -49,6 +49,7 @@ rl.on("close", () => {
             console.log(leaf_count[--x] * leaf_count[--y]);
         }
     }
+    rl.close();
 });
 
 let currentLine = 0;
