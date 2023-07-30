@@ -18,11 +18,12 @@ def main():
         for i in range(n):
             if not dp[i]:
                 stack, j = [], i
-                while j < n:
+                while j < n and not dp[j]:
                     stack.append((a[j], j))
                     j += a[j]
-                ai, j = stack.pop()
-                dp[j] = a[j]
+                if j >= n:
+                    ai, j = stack.pop()
+                    dp[j] = a[j]
                 while stack:
                     ai, j = stack.pop()
                     dp[j] = dp[j + a[j]] + ai
