@@ -18,7 +18,10 @@ def main():
             print(-1)
             continue
         slcm = lcm(len(s), len(t))
-        print(s * (slcm // len(s)))
+        if s * (slcm // len(s)) == t * (slcm // len(t)):
+            print(s * (slcm // len(s)))
+        else:
+            print(-1)
 
 
 def gdc(a, b):
