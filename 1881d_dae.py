@@ -1,4 +1,4 @@
-from math import log
+from math import sqrt
 from sys import stdin, stdout
 
 
@@ -15,13 +15,20 @@ def main():
     for _ in range(t):
         n = int(input())
         a = [int(x) for x in input().split()]
-        lg = 0
-        for ai in a:
-            lg += log(ai, 10)
-        lg /= n
-        ans = 10 ** lg
-        if abs(ans - round(ans)) < 1e-6:
-            print("YES")
+        prod = 1
+        for i in range(n):
+            prod *= a[i]
+        l, r = 1, 2000000
+        while l <= r:
+            m = (l + r) // 2
+            pa = m ** n
+            if pa == prod:
+                print("YES")
+                break
+            elif pa < prod:
+                l = m + 1
+            else:
+                r = m - 1
         else:
             print("NO")
 
