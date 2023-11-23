@@ -14,12 +14,10 @@ def main():
     l, r = [int(_) for _ in input().split()]
     for i in range(l, r + 1):
         for j in range(i + 1, r + 1):
-            if gcd(i, j) == 1:
-                for k in range(j + 1, r + 1):
-                    gki, gkj = gcd(k, i), gcd(k, j)
-                    if (gkj == 1 and gki != 1) or (gkj != 1 and gki == 1):
-                        print(" ".join(sorted([str(_) for _ in [i, j, k]])))
-                        return
+            for k in range(j + 1, r + 1):
+                if gcd(i, j) == 1 and gcd(j, k) == 1 and gcd(i, k) != 1:
+                    print(f"{i} {j} {k}")
+                    return
     print(-1)
 
 
