@@ -1,15 +1,20 @@
+from bisect import bisect_left
+from sys import stdin, stdout
+
+
+def input():
+    return stdin.readline().strip()
+
+
+def print(string):
+    return stdout.write(str(string) + "\n")
+
+
 def main():
-    _, k = map(int, input().split(" "))
-    scores = list(map(int, input().split(" ")))
-    if scores[k - 1] > 0:
-        while k < len(scores) and scores[k - 1] == scores[k]:
-            k += 1
-    elif scores[k - 1] < 1:
-        while k > 1 and scores[k - 1] == scores[k - 2]:
-            k -= 1
-        k -= 1
-    print(k)
+    n, k = [int(_) for _ in input().split()]
+    a = sorted([int(_) for _ in input().split()])
+    print(n - bisect_left(a, max(1, a[n - k])))
 
 
-if "__main__" == __name__:
+if __name__ == "__main__":
     main()
