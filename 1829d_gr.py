@@ -30,9 +30,8 @@ def find_pile(n, m, dp={}):
         if (n // 3) * 2 not in dp:
             dp[(n // 3) * 2] = find_pile((n // 3) * 2, m, dp)
         return dp[n // 3] or dp[(n // 3) * 2]
-    else:
-        dp[n] = False
-        return dp[n]
+    dp[n] = False
+    return dp[n]
 
 
 if __name__ == "__main__":
