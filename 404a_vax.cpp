@@ -2,7 +2,12 @@
 
 using namespace std;
 
-int main()
+/**
+ * @brief The main function
+ *
+ * @return int
+ */
+int main(void)
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
@@ -42,4 +47,5 @@ int main()
 		}
 	}
 	v[0][0] != v[0][1] ? cout << "YES\n" : cout << "NO\n";
+	return (0);
 }
