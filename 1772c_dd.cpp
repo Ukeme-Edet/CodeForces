@@ -11,21 +11,32 @@ int main(void)
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	short t, k, n, ne, e, d;
+	short t, n, k, i, d, in;
+	vector<short> a;
+
 	cin >> t;
 	while (t--)
 	{
+		d = 1;
 		cin >> k >> n;
-		ne = 0, e = 1, d = 1;
-		while (ne++ < k)
+		a.resize(k);
+		a[0] = 1;
+		a[1] = 2;
+		in = n;
+		for (i = 3; i <= k; i++)
 		{
-			cout << e << " ";
-			e += d;
-			d++;
-			if (d == n)
-				d = 1;
+			a[i - 1] = a[i - 2] + 1;
+			if (n - k >= d)
+			{
+				a[i - 1] += d;
+				n -= d;
+				d++;
+			}
 		}
-		cout << "\n";
+		a[k - 1] = in;
+		for (auto i : a)
+			cout << i << " ";
+		cout << '\n';
 	}
 	return (EXIT_SUCCESS);
 }
