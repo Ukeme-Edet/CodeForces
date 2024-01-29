@@ -1,3 +1,13 @@
+/**
+ * @file 1772c_dd.cpp
+ * @author Ukeme Edet (ukemeedet2207@gmail.com)
+ * @brief The solution for codeforces 1772C (https://codeforces.com/problemset/problem/1772/C)
+ * @version 0.1
+ * @date 2024-01-29
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #include <bits/stdc++.h>
 
 using namespace std;
