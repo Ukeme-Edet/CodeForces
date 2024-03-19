@@ -1,14 +1,3 @@
-/**
- * @file 1913b_sad.cpp
- * @author Ukeme Edet (ukemeedet2207@gmail.com)
- * @brief The solution to the problem Swap and Delete(https://codeforces.com/problemset/problem/1913/B)
- * @version 0.1
- * @date 2024-03-15
- *
- * @copyright Copyright (c) 2024
- *
- */
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -23,28 +12,37 @@ int main(void)
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	short t;
-	int oc, zc, i;
+	int oc, zc;
 	string s;
 
 	cin >> t;
+next:
 	while (t--)
 	{
 		cin >> s;
-		oc = count(s.begin(), s.end(), '1');
-		zc = s.length() - oc;
-		i = 0;
-		while (i < s.length())
+		zc = count(s.begin(), s.end(), '0'), oc = count(s.begin(), s.end(), '1');
+		for (char &c : s)
 		{
-			if (s[i] == '1' && zc > 0)
+			if (c == '1')
+			{
+				if (zc == 0)
+				{
+					cout << oc << '\n';
+					goto next;
+				}
 				zc--;
-			else if (s[i] == '0' && oc > 0)
-				oc--;
+			}
 			else
-				break;
-			i++;
+			{
+				if (oc == 0)
+				{
+					cout << zc << '\n';
+					goto next;
+				}
+				oc--;
+			}
 		}
-		cout << s.length() - i << '\n';
+		cout << 0 << '\n';
 	}
-
 	return (EXIT_SUCCESS);
 }
