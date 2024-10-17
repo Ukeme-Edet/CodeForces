@@ -24,17 +24,38 @@ using namespace std;
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    ll t, n, i, tv, fm[400001], res;
+    ll t, n, i, tv, pv, fm1[400001] = {0}, fm2[400001] = {0}, res, tres;
 
     cin >> t;
     while (t--) {
-        cin >> n, memset(fm, 0, sizeof(ll) * 400001), res = 0;
-        for (i = 0; i < 2 * n; i++) {
+        cin >> n, res = tres = 0, pv = 0;
+        for (i = 0; i < n; i++) {
             cin >> tv;
-            fm[tv]++;
+            if (pv == tv)
+                tres++;
+            else {
+                fm1[pv] = max(fm1[pv], tres);
+                tres = 1;
+            }
+            pv = tv;
         }
-        for (i = 1; i <= 2 * n; i++)
-            res = max(res, fm[i]);
+        fm1[pv] = max(fm1[pv], tres);
+        tres = 0, pv = 0;
+        for (i = 0; i < n; i++) {
+            cin >> tv;
+            if (pv == tv)
+                tres++;
+            else {
+                fm2[pv] = max(fm2[pv], tres);
+                tres = 1;
+            }
+            pv = tv;
+        }
+        fm2[pv] = max(fm2[pv], tres);
+        for (i = 1; i <= 2 * n; i++) {
+            res = max(res, fm1[i] + fm2[i]);
+            fm1[i] = fm2[i] = 0;
+        }
         cout << res << '\n';
     }
     return (EXIT_SUCCESS);
