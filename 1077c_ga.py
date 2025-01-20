@@ -24,15 +24,19 @@ def main():
     n = int(input())
     a = [int(x) for x in input().split()]
     s = sum(a)
-    em = defaultdict(list)
+    fm = defaultdict(int)
+    for ai in a:
+        fm[ai] += 1
+    res = []
     for i in range(n):
-        em[a[i]].append(i)
-    res = set()
-    for i in range(n):
-        if em[s - a[i] * 2]:
-            [res.add(x) for x in em[s - a[i] * 2] if x != i]
+        s -= a[i]
+        fm[a[i]] -= 1
+        if not s % 2 and fm[s // 2] > 0:
+            res.append(i + 1)
+        s += a[i]
+        fm[a[i]] += 1
     print(len(res))
-    print(" ".join(str(x + 1) for x in res))
+    print(" ".join(str(x) for x in res))
 
 
 if __name__ == "__main__":
