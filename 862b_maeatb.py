@@ -27,21 +27,18 @@ def main():
         u, v = [int(x) for x in input().split()]
         adj[u].append(v)
         adj[v].append(u)
+    cm = {True: 0, False: 0}
+    q = deque([(1, True)])
     visited = [False] * (n + 1)
-    l = 0
-    ls, rs = 0, 0
-    queue = deque([1])
-    while queue:
-        next_queue = deque()
-        while queue:
-            u = queue.popleft()
-            visited[u] = True
-            ls += 1 - l
-            rs += l
-            next_queue.extend(v for v in adj[u] if not visited[v])
-        queue = next_queue
-        l = 1 - l
-    print(ls * rs - (n - 1))
+    visited[1] = True
+    while q:
+        u, c = q.popleft()
+        cm[c] += 1
+        for v in adj[u]:
+            if not visited[v]:
+                visited[v] = True
+                q.append((v, not c))
+    print(cm[True] * cm[False] - (n - 1))
 
 
 if __name__ == "__main__":
