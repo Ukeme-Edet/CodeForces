@@ -30,13 +30,7 @@ int main(void) {
     while (t--) {
         cin >> n >> k;
         k--;
-        if (n % 2)
-            cout << (k + k / (n / 2)) % n + 1 << '\n';
-        else {
-            if (k >= n)
-                k %= n;
-            cout << k + 1 << '\n';
-        }
+        cout << (k + (k / (n / 2)) * (n % 2)) % n + 1 << '\n';
     }
     return (EXIT_SUCCESS);
 }
