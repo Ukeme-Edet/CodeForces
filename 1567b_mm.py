@@ -20,12 +20,14 @@ def print(string):
 
 
 def main():
+    xor = 0
+    xormap = {}
+    for i in range(300000):
+        xor ^= i
+        xormap[str(i + 1)] = xor
     for _ in range(int(input())):
         a, b = [int(x) for x in input().split()]
-        res = [i for i in range(a)]
-        cxor = 0
-        for i in res:
-            cxor ^= i
+        cxor = xormap[str(a)]
         print(a if cxor == b else a + 1 if cxor ^ b != a else a + 2)
 
 
